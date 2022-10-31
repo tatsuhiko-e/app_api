@@ -2,13 +2,20 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      mount_devise_token_auth_for 'Customer', at: 'auth', controllers: {
-        registrations: 'api/v1/auth/registrations'
+      mount_devise_token_auth_for 'Customer', at: 'customer', controllers: {
+        registrations: 'api/v1/customer/registrations'
       }
-      namespace :auth do
+      namespace :customer do
         resources :sessions, only: %i[index]
       end
       resources :musics, only: [:index, :create, :show, :update]
+
+      mount_devise_token_auth_for 'Admin', at: 'admin', controllers: {
+        registrations: 'api/v1/admin/registrations'
+      }
+      namespace :admin do
+        resources :sessions, only: %i[index]
+      end
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

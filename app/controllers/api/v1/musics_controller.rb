@@ -1,6 +1,6 @@
 class Api::V1::MusicsController < ApplicationController
   def index
-    musics = Music.all
+    musics = Music.where(admin_id: current_api_v1_admin.id)
     render json: musics.order(release_date: :desc)
   end
 
@@ -11,10 +11,11 @@ class Api::V1::MusicsController < ApplicationController
 
   def create
     music = Music.new(music_params)
+    music.admin_id = current_api_v1_admin.id
     if music.save
       render json: { status: :ok, data: music }
     else
-      render json: { status: :bad_requestttttttt, data: errors }
+      render json: { status: :bad_request, data: errors }
     end
   end
 
@@ -30,6 +31,6 @@ class Api::V1::MusicsController < ApplicationController
   private
 
   def music_params
-    params.require(:music).permit(:title, :theme, :active, :release_date, :image, :audio)
+    params.require(:music).permit(:title, :theme, :active, :release_date, :image, :audio, :admin_id)
   end
 end

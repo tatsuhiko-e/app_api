@@ -86,6 +86,6 @@ test:
 production:
   <<: *default
   database: myapp_production
-  username: <%= ENV["DATABASE_USERNAME"] %>
-  password: <%= ENV["DATABASE_PASSWORD"] %>
-  host: <%= ENV["DATABASE_HOST"] %>
+  username: root
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  cocket: /var/run/postgresql/.s.PGSQL.5432

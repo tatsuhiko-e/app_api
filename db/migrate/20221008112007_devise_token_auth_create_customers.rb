@@ -31,7 +31,6 @@ class DeviseTokenAuthCreateCustomers < ActiveRecord::Migration[7.0]
       ## User Info
       t.string :name
       t.string :nickname
-      t.string :image
       t.string :email
 
       ## Tokens

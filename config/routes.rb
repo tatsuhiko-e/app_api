@@ -17,6 +17,8 @@ Rails.application.routes.draw do
       namespace :admin do
         resources :sessions, only: %i[index]
       end
+      patch "admins/edit" => "admins#edit"
+      get "admins/:id" => "admins#show"
     end
   end
 
